@@ -12,7 +12,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* GET home page. */
 app.get('/', function(req, res, next) {
   // get all free room of povo
   unitn.easyroomRequest()
@@ -20,7 +19,7 @@ app.get('/', function(req, res, next) {
     let rooms = unitn.createRoomsObject(obj.data);    
     let freeRooms = unitn.getFreeRooms(rooms);          
     let renderedTable = time.setFormatTime(freeRooms);    
-    res.send(renderedTable)  
+    res.send(renderedTable)
   })  
 });
 

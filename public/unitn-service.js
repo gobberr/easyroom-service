@@ -17,11 +17,9 @@ let params = {
  * http POST request (url, parameters)
  * */ 
 function easyroomRequest() {   
-  
   // set current date
   let date = new Date();
   params['date'] = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
-  
   return axios.post(easyroom, qs.stringify(params)); 
 }
 
@@ -42,7 +40,6 @@ function createRoomsObject(data) {
       let roomCode = e.CodiceAula;
       // Create the lecture array with the from, to components
       let lessonHours = [e.from, e.to];
-
       // Add the lecture to the corresponding class in the rooms array
       // If the room doesn't exist in the object, create a new array with the roomCode as key
       if (!(roomCode in rooms)) {        
