@@ -1,6 +1,5 @@
 const axios = require('axios')  
 const qs = require('qs')
-const common = require('./time-service')
 const current_date = new Date();
 const current_time = parseInt('' + current_date.getHours() + ("0" + current_date.getMinutes()).slice(-2));
 const easyroom = "https://easyroom.unitn.it/Orario/rooms_call.php";   
@@ -74,8 +73,8 @@ function getFreeRooms(rooms) {
       // Get the current lecture of index i
       let time = room[i];
       // Convert the strings hh:mm:ss to the integers hhmm
-      let from = common.parseTime(time[0]);
-      let to = common.parseTime(time[1]);     
+      let from = parseTime(time[0]);
+      let to = parseTime(time[1]);     
       // If the current time is past the start of the lecture but prior to its ending,
       // then the room is occupied
       if (current_time > from && current_time < to) {        
@@ -102,6 +101,43 @@ function getFreeRooms(rooms) {
   return freeRooms;
 }
 
+/** 
+ * from 0000 to 00:00
+ * @param {*} time 
+ */
+function reverseParseTime(time) {    
+  return (time.toString().substring(0, 2) + ':' + time.toString().substring(2, 4))
+}
+
+/**
+ * set the time in the accepted format
+ * @param {*} renderedTable 
+ */
+function setFormatTime(renderedTable) {    
+  for(let i=0; i<renderedTable.length; i++) {
+    if(renderedTable[i].next_lesson) {
+      renderedTable[i].next_lesson[0] = reverseParseTime(renderedTable[i].next_lesson[0])
+      renderedTable[i].next_lesson[1] = reverseParseTime(renderedTable[i].next_lesson[1])
+    }
+    if(renderedTable[i].occupied_until) {      
+      renderedTable[i].occupied_until = reverseParseTime(renderedTable[i].occupied_until)
+    }
+  }
+  return renderedTable;
+}
+
+/**
+ * The from, to values received from the server are strings formatted as hh:mm:ss
+ * This function converts the string in an integer that is more convenient during comparisons
+ * @param {*} time 
+ */
+function parseTime(time) {
+  let tmp = time.split(":");
+  // The resulting integer will be hhmm
+  return parseInt(tmp[0] + tmp[1]);
+}
+
+exports.setFormatTime = setFormatTime;
 exports.easyroomRequest = easyroomRequest; 
 exports.createRoomsObject = createRoomsObject;
 exports.getFreeRooms = getFreeRooms;

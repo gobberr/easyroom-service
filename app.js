@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const unitn = require('./public/unitn-service');
-const time = require('./public/time-service');
 
 const app = express();
 
@@ -18,7 +17,7 @@ app.get('/', function(req, res, next) {
   .then((obj) => {    
     let rooms = unitn.createRoomsObject(obj.data);    
     let freeRooms = unitn.getFreeRooms(rooms);          
-    let renderedTable = time.setFormatTime(freeRooms);    
+    let renderedTable = unitn.setFormatTime(freeRooms);    
     res.send(renderedTable)
   })  
 });
