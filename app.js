@@ -23,6 +23,16 @@ app.get('/', function(req, res, next) {
   })  
 });
 
+app.get('/demo', function(req, res, next) {
+  // get all free room of povo
+  unitn.easyroomRequest()
+  .then((obj) => {    
+    let rooms = unitn.createRoomsObject(obj.data);    
+    let freeRooms = unitn.getFreeRooms(rooms);              
+    res.send(freeRooms)
+  })  
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

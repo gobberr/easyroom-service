@@ -1,3 +1,3 @@
 ## API
-# GET - json of rooms
-1) https://unitn-service.herokuapp.com
+1.  GET - json of rooms
+    `https://unitn-service.herokuapp.com`
