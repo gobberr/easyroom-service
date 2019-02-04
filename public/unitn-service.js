@@ -1,7 +1,7 @@
 const axios = require('axios')  
 const qs = require('qs')
 const current_date = new Date();
-const current_time = parseInt('' + current_date.getHours() + ("0" + current_date.getMinutes()).slice(-2));
+const current_time = parseInt('' + current_date.getHours() + ('0' + current_date.getMinutes()).slice(-2));
 const easyroom = "https://easyroom.unitn.it/Orario/rooms_call.php";   
 
 // Params object that contains the data used by the API
@@ -47,8 +47,6 @@ function createRoomsObject(data) {
       // Add the lecture to the array associated to the corresponding room
       rooms[roomCode].push(lessonHours);
     });
-  } else {
-    // If no events are in the arrat, log it and exit    
   }
   // Return the rooms object
   return rooms;

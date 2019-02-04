@@ -11,7 +11,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function(req, res, next) {
+app.get('/', function(req,res,next) {
+  res.send('Listening for request...')
+});
+
+app.get('/room', function(req, res, next) {
   // get all free room of povo
   unitn.easyroomRequest()
   .then((obj) => {    
