@@ -11,8 +11,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function(req,res,next) {
-  res.send('Listening for request...')
+app.get('/', function(req,res,next) {  
+  unitn.easyroomRequest()
+  .then((obj) => {
+    res.json(obj.data)
+  })
 });
 
 app.get('/room', function(req, res, next) {
@@ -22,7 +25,7 @@ app.get('/room', function(req, res, next) {
     let rooms = unitn.createRoomsObject(obj.data);    
     let freeRooms = unitn.getFreeRooms(rooms);          
     let renderedTable = unitn.setFormatTime(freeRooms);    
-    res.send(renderedTable)
+    res.json(renderedTable)
   })  
 });
 
@@ -32,7 +35,7 @@ app.get('/demo', function(req, res, next) {
   .then((obj) => {    
     let rooms = unitn.createRoomsObject(obj.data);    
     let freeRooms = unitn.getFreeRooms(rooms);              
-    res.send(freeRooms)
+    res.json(freeRooms)
   })  
 });
 
@@ -49,7 +52,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json(res.locals.message);
 });
 
 module.exports = app;

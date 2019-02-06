@@ -14,8 +14,7 @@
 
 4.  Change the ENDPOINT of request from `https://unitn-service.herokuapp.com/<API>` to `localhost:3001/<API>`
 
-## APIs 
+## Documentation
 
-1.  `https://unitn-service.herokuapp.com/room` - get json of rooms
+APIs documentation [at this link](https://github.com/gobberr/easyroom-service/wiki/)
 
-2.  `https://unitn-service.herokuapp.com/demo` - get json of rooms for demo
