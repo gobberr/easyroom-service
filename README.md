@@ -1,7 +1,10 @@
-## Deployment url
-## https://unitn-service.herokuapp.com
+## Documentation
 
-## Setup
+APIs documentation [at this link](https://github.com/gobberr/easyroom-service/wiki/APIs)
+
+## Heroku deployment [at this link](https://unitn-service.herokuapp.com)
+
+## Local setup
 
 1.  Install dependencies
     `npm install`
@@ -11,10 +14,4 @@
 
 3.  Access the service 
     `localhost:3001`
-
-4.  Change the ENDPOINT of request from `https://unitn-service.herokuapp.com/<API>` to `localhost:3001/<API>`
-
-## Documentation
-
-APIs documentation [at this link](https://github.com/gobberr/easyroom-service/wiki/)
-
+    
